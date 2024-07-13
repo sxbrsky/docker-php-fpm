@@ -15,7 +15,7 @@
 
 ## Supported tags and respective Dockerfile links
 
-[`All supported tags see here`](https://hub.docker.com/r/nulxrd/php-fpmcli/tags)
+[`All supported tags see here`](https://hub.docker.com/r/nulxrd/php-fpm/tags)
 
 ## Environment Variables
 
