@@ -5,7 +5,6 @@ set -eux;
 DOCKER_BUILDKIT=1
 DOCKER_REPOSITORY=nulxrd/docker-php-fpm
 
-GPG_CHECK=false
 LATEST=false
 PHP_VERSION="8.3.9"
 TARGET_PLATFORM="linux/amd64,linux/arm64"
@@ -24,13 +23,9 @@ while [ "$#" -gt 0 ]; do
             LATEST=true
             shift
             ;;
-        --gpg_check)
-            GPG_CHECK=true
-            shift
-            ;;
         *)
             echo "Unknown argument: $1"
-            echo "Usage: $0 [--version <php_version>] [--platform <platform>] [--latest] [--gpg_check]"
+            echo "Usage: $0 [--version <php_version>] [--platform <platform>] [--latest]"
             exit 1;
             ;;
     esac
@@ -44,7 +39,6 @@ docker buildx inspect --bootstrap
 
 docker buildx build --platform "${TARGET_PLATFORM}" \
 --build-arg PHP_VERSION=${PHP_VERSION} \
---build-arg GPG_CHECK=${GPG_CHECK} \
 --tag "${DOCKER_REPOSITORY}:${PHP_VERSION}" \
 --tag "${DOCKER_REPOSITORY}:${PHP_VERSION_MAJOR}" \
 --tag "${DOCKER_REPOSITORY}:${PHP_VERSION_MINOR}" \
